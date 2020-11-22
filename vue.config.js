@@ -24,6 +24,10 @@ module.exports = {
     // Remove prefetch plugin to stop downloading all assets on first page load
     config.plugins.delete('prefetch')
   },
+
+  devServer: {
+    proxy: 'https://api.toucanimpact.com/api/'
+  },
   // Vue CLI configuration
   productionSourceMap: false
 }

@@ -362,6 +362,10 @@ export default {
         this.$store.dispatch("gettags").then(resp => {
             this.tagsArray = resp.data
         }).catch(err => (console.log(err)))
+
+        this.$store.dispatch("getGlobalgoalArray").then(resp => {
+            this.optionsCheckboxes = resp.data
+        }).catch(err => (console.log(err)))
     }
 }
 </script>

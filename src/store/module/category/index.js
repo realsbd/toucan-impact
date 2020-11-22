@@ -35,7 +35,7 @@ const actions = {
   getcategoryTypes({ commit }) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/categories/",
+        url: "https://api.toucanimpact.com/api/categories",
         method: "GET"
       })
         .then(resp => {
@@ -61,7 +61,7 @@ const actions = {
   },
   getcategoryArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/categories-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/categories-to-array").then(resp => {
         commit("SET_CATEGORY_TYPE_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {
@@ -73,7 +73,7 @@ const actions = {
   addcategoryType({ commit }, categoryType) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/categories/",
+        url: "https://api.toucanimpact.com/api/categories",
         data: categoryType,
         method: "POST"
       })

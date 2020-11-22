@@ -33,7 +33,7 @@ const mutations = {
 
 const actions = {
   gettags({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/tags/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/tags").then(resp => {
       commit("SET_TAG", resp.data)
     }).catch(err => {
       commit("ERROR_TAG", err)
@@ -52,7 +52,7 @@ const actions = {
   },
   gettagsArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/tags-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/tags-to-array").then(resp => {
         commit("SET_TAG_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {

@@ -29,7 +29,7 @@ const mutations = {
 
 const actions = {
   getwntkTypes({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/whoneedstoknow/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/whoneedstoknow").then(resp => {
       commit("SET_WNTK_TYPE", resp.data)
     }).catch(err => {
       commit("ERROR_WNTK_TYPE", err)
@@ -49,7 +49,7 @@ const actions = {
   addwntkType({ commit }, wntkType) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/whoneedstoknow/",
+        url: "https://api.toucanimpact.com/api/whoneedstoknow",
         data: wntkType,
         method: "POST"
       })

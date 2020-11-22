@@ -60,6 +60,7 @@ const token = localStorage.getItem('token')
 
 if(token) {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 }
 
 axios.interceptors.response.use(null, error => {
