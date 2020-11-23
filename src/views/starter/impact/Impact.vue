@@ -30,12 +30,18 @@
                             {{ impact.impact_date }}
                         </b-td>
                         <b-td class="font-w600 font-size-sm">
-                            <a>
-                                {{ impact.action_by }}
-                            </a>
+                            <ul id="example-1">
+                                <li v-for="item in impact.action_by" :key="item">
+                                    {{ item }}
+                                </li>
+                            </ul>
                         </b-td>
                         <b-td class="font-size-sm">
-                            {{ impact.action_type_id }}
+                            <ul id="example-1">
+                                <li v-for="item in impact.action_type_id" :key="item">
+                                    {{ item }}
+                                </li>
+                            </ul>
                         </b-td>
                         <b-td class="text-center">
                             <b-btn-group>
