@@ -12,7 +12,7 @@
                         <b-row>
                             <b-col lg="4">
                                 <b-form-group label="When was this Action?" label-for="action date">
-                                    <flat-pickr id="action-date" class="form-control bg-white" md="6" xl="3" placeholder="Y-m-d" :state="!$v.form.impact_date.$error && null" v-model="$v.form.impact_date.$model"></flat-pickr>
+                                    <flat-pickr id="action-date" class="form-control bg-white" md="6" xl="3" :config="configCustom" placeholder="dd-mm-YYYY" :state="!$v.form.impact_date.$error && null" v-model="$v.form.impact_date.$model"></flat-pickr>
                                 </b-form-group>
                             </b-col>
                             <b-col lg="4">
@@ -24,9 +24,18 @@
                         <b-form-group label="Action Taken (summary)" label-for="action taken">
                             <ckeditor :editor="ckeditor" v-model="form.action_taken" :config="ckeditorConfig"></ckeditor>
                         </b-form-group>
-                        <b-form-group label="Action Type" label-for="action type">
-                            <v-select multiple v-model="form.action_type_id" :options="actionTypesArray" placeholder="select action types"></v-select>
-                        </b-form-group>
+                        <b-row>
+                            <b-col lg="6">
+                                <b-form-group label="Action Type" label-for="action type">
+                                    <v-select multiple v-model="form.action_type_id" :options="actionTypesArray" placeholder="select action types"></v-select>
+                                </b-form-group>
+                        </b-col>
+                            <b-col lg="6">
+                                <b-form-group label="Impact Type" label-for="impact type">
+                                    <v-select multiple v-model="form.impacttype_id" :options="impactTypeArray" placeholder="Select Impact Types"></v-select>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
                     </base-block>
                     <base-block rounded>
                         <h1><small>2. What's the story</small></h1>
@@ -77,9 +86,7 @@
                         <b-form-group label="Source to reference e.g. B1G1" label-for="reference">
                             <ckeditor :editor="ckeditor" v-model="form.reference" :config="ckeditorConfig"></ckeditor>
                         </b-form-group>
-                        <b-form-group label="Tags" label-for="Tags">
-                            <v-select multiple v-model="form.impacttype_id" :options="tagsArray" placeholder="Select tags"></v-select>
-                        </b-form-group>
+                        
                     </base-block>
                     <base-block rounded>
                         <h1><small>5. Learning and Amplyfing</small></h1>
@@ -89,8 +96,11 @@
                         <b-form-group label="How to improve" label-for="improvement">
                             <ckeditor :editor="ckeditor" v-model="form.how_to_improve" :config="ckeditorConfig"></ckeditor>
                         </b-form-group>
+                        <b-form-group label="Who Needs To Know" label-for="who needs to know">
+                            <v-select multiple v-model="form.wntktype_id" :options="wntkTypeArray" placeholder="select action types"></v-select>
+                        </b-form-group>
                         <b-form-group label="Reminder" label-for="Reminder">
-                            <flat-pickr id="reminder" class="form-control bg-white" md="6" xl="3" placeholder="Y-m-d" v-model="form.follow_up"></flat-pickr>
+                            <flat-pickr id="reminder" class="form-control bg-white" md="6" xl="3" :config="configCustom"  placeholder="dd-mm-YYYY" v-model="form.follow_up"></flat-pickr>
                         </b-form-group>
                         <b-form-group label="Could this be made public?" label-class="font-w600">
                             <b-form-checkbox-group :options="optionsPublicRepeatable" switches></b-form-checkbox-group>
@@ -171,7 +181,7 @@ export default {
                 dateFormat: 'd-m-Y'
             },
             configFriendly: {
-                dateFormat: 'F j, Y'
+                dateFormat: 'd-m-Y'
             },
             configRange: {
                 mode: 'range',
@@ -208,9 +218,10 @@ export default {
             usersArray: [],
             categoriesArray: [],
             recipientsArray: [],
-            tagsArray: [],
+            impactTypeArray: [],
+            wntkTypeArray: [],
             vSelectOptionsMultipleTagsSelected: null,
-            vSelectOptionsMultipleCountries: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", ],
+            vSelectOptionsMultipleCountries: ["Andorra","United Arab Emirates","Afghanistan","Antigua and Barbuda","Anguilla","Albania","Armenia","Angola","Antarctica","Argentina","American Samoa","Austria","Australia","Aruba","Åland","Azerbaijan","Bosnia and Herzegovina","Barbados","Bangladesh","Belgium","Burkina Faso","Bulgaria","Bahrain","Burundi","Benin","Saint Barthélemy","Bermuda","Brunei","Bolivia","Bonaire","Brazil","Bahamas","Bhutan","Bouvet Island","Botswana","Belarus","Belize","Canada","Cocos [Keeling] Islands","Congo","Central African Republic","Republic of the Congo","Switzerland","Ivory Coast","Cook Islands","Chile","Cameroon","China","Colombia","Costa Rica","Cuba","Cape Verde","Curacao","Christmas Island","Cyprus","Czechia","Germany","Djibouti","Denmark","Dominica","Dominican Republic","Algeria","Ecuador","Estonia","Egypt","Western Sahara","Eritrea","Spain","Ethiopia","Finland","Fiji","Falkland Islands","Micronesia","Faroe Islands","France","Gabon","United Kingdom","Grenada","Georgia","French Guiana","Guernsey","Ghana","Gibraltar","Greenland","Gambia","Guinea","Guadeloupe","Equatorial Guinea","Greece","South Georgia and the South Sandwich Islands","Guatemala","Guam","Guinea-Bissau","Guyana","Hong Kong","Heard Island and McDonald Islands","Honduras","Croatia","Haiti","Hungary","Indonesia","Ireland","Israel","Isle of Man","India","British Indian Ocean Territory","Iraq","Iran","Iceland","Italy","Jersey","Jamaica","Jordan","Japan","Kenya","Kyrgyzstan","Cambodia","Kiribati","Comoros","Saint Kitts and Nevis","North Korea","South Korea","Kuwait","Cayman Islands","Kazakhstan","Laos","Lebanon","Saint Lucia","Liechtenstein","Sri Lanka","Liberia","Lesotho","Lithuania","Luxembourg","Latvia","Libya","Morocco","Monaco","Moldova","Montenegro","Saint Martin","Madagascar","Marshall Islands","Macedonia","Mali","Myanmar [Burma]","Mongolia","Macao","Northern Mariana Islands","Martinique","Mauritania","Montserrat","Malta","Mauritius","Maldives","Malawi","Mexico","Malaysia","Mozambique","Namibia","New Caledonia","Niger","Norfolk Island","Nigeria","Nicaragua","Netherlands","Norway","Nepal","Nauru","Niue","New Zealand","Oman","Panama","Peru","French Polynesia","Papua New Guinea","Philippines","Pakistan","Poland","Saint Pierre and Miquelon","Pitcairn Islands","Puerto Rico","Palestine","Portugal","Palau","Paraguay","Qatar","Réunion","Romania","Serbia","Russia","Rwanda","Saudi Arabia","Solomon Islands","Seychelles","Sudan","Sweden","Singapore","Saint Helena","Slovenia","Svalbard and Jan Mayen","Slovakia","Sierra Leone","San Marino","Senegal","Somalia","Suriname","South Sudan","São Tomé and Príncipe","El Salvador","Sint Maarten","Syria","Swaziland","Turks and Caicos Islands","Chad","French Southern Territories","Togo","Thailand","Tajikistan","Tokelau","East Timor","Turkmenistan","Tunisia","Tonga","Turkey","Trinidad and Tobago","Tuvalu","Taiwan","Tanzania","Ukraine","Uganda","U.S. Minor Outlying Islands","United States","Uruguay","Uzbekistan","Vatican City","Saint Vincent and the Grenadines","Venezuela","British Virgin Islands","U.S. Virgin Islands","Vietnam","Vanuatu","Wallis and Futuna","Samoa","Kosovo","Yemen","Mayotte","South Africa","Zambia","Zimbabwe"],
             vSelectOptionsMultipleCountriesSelected: null,
 
             ckeditorData: '<p>Hello CKEditor5!</p>',
@@ -278,7 +289,8 @@ export default {
                 reference: null,
                 insight: null,
                 how_to_improve: null,
-                follow_up: null
+                follow_up: null,
+                wntktype_id: null
             },
         }
     },
@@ -359,8 +371,16 @@ export default {
             this.recipientsArray = resp.data
         }).catch(err => (console.log(err)))
 
-        this.$store.dispatch("gettags").then(resp => {
-            this.tagsArray = resp.data
+        this.$store.dispatch("getImpactTypesArray").then(resp => {
+            this.impactTypeArray = resp.data
+        }).catch(err => (console.log(err)))
+
+        this.$store.dispatch("getwntkTypesArray").then(resp => {
+            this.wntkTypeArray = resp.data
+        }).catch(err => (console.log(err)))
+
+        this.$store.dispatch("getGlobalgoalArray").then(resp => {
+            this.optionsCheckboxes = resp.data
         }).catch(err => (console.log(err)))
     }
 }

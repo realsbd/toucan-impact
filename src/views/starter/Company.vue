@@ -46,9 +46,9 @@
                                     Please enter Compnay website
                                 </b-form-invalid-feedback>
                             </b-form-group>
-                            <!-- <b-form-group>
+                            <b-form-group>
                                 <v-select multiple v-model="form.users" :options="usersArray" placeholder="Select user(s)"></v-select>
-                            </b-form-group> -->
+                            </b-form-group>
                             <b-form-group>
                                 <b-button type="submit" size="sm" variant="primary">
                                     Submit
@@ -89,7 +89,8 @@
                             {{ company.website }}
                         </b-td>
                         <b-td>
-                            {{ ["ava2", "ava2"] }}
+                            {{ company.user_company }}
+
                             <!-- <b-badge :variant="company.labelVariant">{{ company.labelText }}</b-badge> -->
                         </b-td>
                         <b-td class="text-center">
@@ -118,7 +119,7 @@
 </style>
 
 <script>
-// import VueSelect from 'vue-select'
+import VueSelect from 'vue-select'
 
 import {
     mapGetters
@@ -134,20 +135,30 @@ import {
     minLength
 } from 'vuelidate/lib/validators'
 
-
 export default {
     mixins: [validationMixin],
     components: {
-        // 'v-select': VueSelect,
+        'v-select': VueSelect,
+    },
+    filters: {
+        capitalize: function (value) {
+            if (!value) return ''
+            let data = value.filter(function (e) {
+                return e.user_id
+            })
+            return data
+        }
     },
     data() {
         return {
+            vSelectOptionsMultiple: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'Ruby', 'Angular', 'React', 'Vue.js'],
+            vSelectOptionsMultipleSelected: null,
             logo: null,
             form: {
                 name: '',
                 email: '',
                 website: '',
-                usersArray: [],
+                users: null,
             },
             usersArray: []
         }
@@ -188,13 +199,16 @@ export default {
             formData.append('name', this.form.name)
             formData.append('email', this.form.email)
             formData.append('website', this.form.website)
-            formData.append('users', this.form.usersArray)
+            formData.append('users', this.form.users)
 
             this.$store
                 .dispatch("addCompany", formData)
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getCompanies")
+                    this.form.name = "";
+                    this.form.email = ""
+                    this.form.website = ""
                 })
                 .catch(err => console.log(err))
         },

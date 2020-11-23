@@ -155,6 +155,7 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("gettags")
+                    this.form.label = ""
                 })
                 .catch(err => console.log(err))
         },

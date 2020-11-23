@@ -33,7 +33,7 @@ const mutations = {
 
 const actions = {
   getactionTypes({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/action-type/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/action-type").then(resp => {
       commit("SET_ACTION_TYPE", resp.data)
     }).catch(err => {
       commit("ERROR_ACTION_TYPE", err)
@@ -52,7 +52,7 @@ const actions = {
   },
   getactionTypesArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/action-type-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/action-type-to-array").then(resp => {
         commit("SET_ACTION_TYPE_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {
@@ -81,7 +81,7 @@ const actions = {
   addactionType({ commit }, actionType) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/action-type/",
+        url: "https://api.toucanimpact.com/api/action-type",
         data: actionType,
         method: "POST"
       })

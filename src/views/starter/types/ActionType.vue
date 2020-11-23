@@ -129,6 +129,7 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getactionTypes")
+                    this.form.label = ""
                 })
                 .catch(err => console.log(err))
         },

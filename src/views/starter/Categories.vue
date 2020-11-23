@@ -127,6 +127,7 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getcategoryTypes")
+                    this.form.label = ""
                 })
                 .catch(err => console.log(err))
         },

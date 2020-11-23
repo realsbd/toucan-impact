@@ -184,6 +184,10 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getUsers")
+                    this.form.first_name = "";
+                    this.form.last_name = "";
+                    this.form.email = "";
+                    this.form.password = "";
                 })
                 .catch(err => console.log(err))
 

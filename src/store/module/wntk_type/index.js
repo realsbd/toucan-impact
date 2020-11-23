@@ -2,6 +2,7 @@ import axios from "axios"
 
 const state = {
   wntkTypes: [],
+  wntkTypesArray: [],
   wntkType: {},
   status: ""
 }
@@ -18,6 +19,9 @@ const mutations = {
     state.wntkType = payload
     state.status = "success"
   },
+  SET_WNTK_TYPE_ARRAY(state, wntkTypesArray) {
+    state.wntkTypesArray = wntkTypesArray
+  },
   ERROR_WNTK_TYPE(state) {
     state.status = "error"
   },
@@ -29,7 +33,7 @@ const mutations = {
 
 const actions = {
   getwntkTypes({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/whoneedstoknow/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/whoneedstoknow").then(resp => {
       commit("SET_WNTK_TYPE", resp.data)
     }).catch(err => {
       commit("ERROR_WNTK_TYPE", err)
@@ -46,10 +50,21 @@ const actions = {
       })
     })
   },
+  getwntkTypesArray({ commit }) {
+    return new Promise((resolve, reject) => {
+      axios.get("https://api.toucanimpact.com/api/whoneedstoknow-to-array").then(resp => {
+        commit("SET_WNTK_TYPE_ARRAY", resp.data)
+        resolve(resp)
+      }).catch(err => {
+        commit("ERROR_WNTK_TYPE", err)
+        reject(err)
+      })
+    })
+  },
   addwntkType({ commit }, wntkType) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/whoneedstoknow/",
+        url: "https://api.toucanimpact.com/api/whoneedstoknow",
         data: wntkType,
         method: "POST"
       })

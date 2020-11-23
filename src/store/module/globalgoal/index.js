@@ -2,6 +2,7 @@ const axios = require('axios').default;
 
 const state = {
   globalgoals: [],
+  globalgoalsarray: [],
   globalgoal: {},
   status: ""
 }
@@ -13,6 +14,9 @@ const mutations = {
   },
   SET_GLOBALGOAL(state, globalgoals) {
     state.globalgoals = globalgoals
+  },
+  SET_GLOBALGOAL_ARRAY(state, globalgoalsarray) {
+    state.globalgoalsarray = globalgoalsarray
   },
   ADD_GLOBALGOAL_ID(state, payload) {
     state.globalgoal = payload
@@ -29,7 +33,7 @@ const mutations = {
 
 const actions = {
   getGlobalgoals({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/global-goals/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/global-goals").then(resp => {
       commit("SET_GLOBALGOAL", resp.data)
     }).catch(err => {
       commit("ERROR_GLOBALGOAL", err)
@@ -46,10 +50,21 @@ const actions = {
       })
     })
   },
+  getGlobalgoalArray({ commit }) {
+    return new Promise((resolve, reject) => {
+      axios.get("https://api.toucanimpact.com/api/global-goals-to-array").then(resp => {
+        commit("SET_GLOBALGOAL_ARRAY", resp.data)
+        resolve(resp)
+      }).catch(err => {
+        commit("ERROR_GLOBALGOAL", err)
+        reject(err)
+      })
+    })
+  },
   addGlobalgoal({ commit }, globalgoal) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/global-goals/",
+        url: "https://api.toucanimpact.com/api/global-goals",
         data: globalgoal,
         method: "POST"
       })

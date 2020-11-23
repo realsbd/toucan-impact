@@ -33,7 +33,7 @@ const mutations = {
 
 const actions = {
   getrecipients({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/recipient/").then(resp => {
+    axios.get("https://api.toucanimpact.com/api/recipient").then(resp => {
       commit("SET_RECIPIENT_TYPE", resp.data)
     }).catch(err => {
       commit("ERROR_RECIPIENT_TYPE", err)
@@ -52,7 +52,7 @@ const actions = {
   },
   getrecipientsArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/recipient-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/recipient-to-array").then(resp => {
         commit("SET_RECIPIENT_TYPE_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {
@@ -64,7 +64,7 @@ const actions = {
   addrecipient({ commit }, recipient) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/recipient/",
+        url: "https://api.toucanimpact.com/api/recipient",
         data: recipient,
         method: "POST"
       })

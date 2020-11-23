@@ -40,6 +40,11 @@ export default {
       icon: 'si si-speedometer'
     },
     {
+      name: 'Tags',
+      to: '/tags',
+      icon: 'si si-speedometer'
+    },
+    {
       name: 'Types',
       icon: 'si si-layers',
       subActivePaths: '/types',

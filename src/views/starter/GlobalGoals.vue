@@ -176,6 +176,9 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getGlobalgoals")
+                    this.form.label = "";
+                    this.form.link = "";
+                    this.form.description = "";
                 })
                 .catch(err => console.log(err))
         },

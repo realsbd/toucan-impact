@@ -56,7 +56,7 @@ const actions = {
   },
   getCompaniesArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/companies-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/companies-to-array").then(resp => {
         commit("SET_COMPANY_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {

@@ -45,6 +45,7 @@ const actions = {
           localStorage.setItem('last_name', user.last_name)
 
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+          axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
           commit("AUTH_SUCCESS", token)
           commit("SET_USER", user)
           resolve(resp)
@@ -73,6 +74,7 @@ const actions = {
           localStorage.setItem('last_name', user.last_name)
 
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+          axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
           commit("AUTH_SUCCESS", token)
           commit("SET_USER", user)
           resolve(resp)

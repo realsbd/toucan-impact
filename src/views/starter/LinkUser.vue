@@ -64,8 +64,6 @@ import {
     required
 } from 'vuelidate/lib/validators'
 
-// import axios from "axios"
-
 export default {
     mixins: [validationMixin],
 
@@ -116,11 +114,6 @@ export default {
         },
     },
     mounted() {
-
-        // axios.get("https://api.toucanimpact.com/api/users-to-array/")
-        // .then(response => (this.usersArray = response.data))
-        // .catch(error => console.log(error))
-
         this.$store.dispatch("getUsersArray").then(resp => {
             this.usersArray = resp.data
         }).catch(err => (console.log(err)))

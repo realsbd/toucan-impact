@@ -56,7 +56,7 @@ const actions = {
   },
   getUsersArray({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("https://api.toucanimpact.com/api/users-to-array/").then(resp => {
+      axios.get("https://api.toucanimpact.com/api/users-to-array").then(resp => {
         commit("SET_USER_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {

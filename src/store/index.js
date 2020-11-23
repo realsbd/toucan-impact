@@ -16,6 +16,7 @@ import action_type from "./module/action_type"
 import wntk_type from "./module/wntk_type"
 import recipient from "./module/recipient"
 import tags from "./module/tags"
+import link_user from "./module/link_user"
 // Register Vuex
 Vue.use(Vuex)
 
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     action_type,
     wntk_type,
     recipient,
-    tags
+    tags,
+    link_user
   }
 })
