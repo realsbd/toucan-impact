@@ -19,8 +19,8 @@ const mutations = {
     state.impactType = payload
     state.status = "success"
   },
-  SET_IMPACT_TYPE_ARRAY(state, impactTypes) {
-    state.impactTypes = impactTypes
+  SET_IMPACT_TYPE_ARRAY(state, impactTypesArray) {
+    state.impactTypesArray = impactTypesArray
   },
   ERROR_IMPACT_TYPE(state) {
     state.status = "error"
@@ -51,10 +51,14 @@ const actions = {
     })
   },
   getImpactTypesArray({ commit }) {
-    axios.get("https://api.toucanimpact.com/api/impact-type-to-array").then(resp => {
-      commit("SET_IMPACT_TYPE_ARRAY", resp.data)
-    }).catch(err => {
-      commit("ERROR_IMPACT_TYPE", err)
+    return new Promise((resolve, reject) => {
+      axios.get("https://api.toucanimpact.com/api/impact-type-to-array").then(resp => {
+        commit("SET_IMPACT_TYPE_ARRAY", resp.data)
+        resolve(resp)
+      }).catch(err => {
+        commit("ERROR_IMPACT_TYPE", err)
+        reject(err)
+      })
     })
   },
   addImpactType({ commit }, impactType) {

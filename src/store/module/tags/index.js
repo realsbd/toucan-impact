@@ -64,7 +64,7 @@ const actions = {
   addtag({ commit }, tag) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/tags/",
+        url: "https://api.toucanimpact.com/api/tags",
         data: tag,
         method: "POST"
       })

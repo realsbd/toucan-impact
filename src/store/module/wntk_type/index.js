@@ -2,6 +2,7 @@ import axios from "axios"
 
 const state = {
   wntkTypes: [],
+  wntkTypesArray: [],
   wntkType: {},
   status: ""
 }
@@ -17,6 +18,9 @@ const mutations = {
   ADD_WNTK_TYPE_ID(state, payload) {
     state.wntkType = payload
     state.status = "success"
+  },
+  SET_WNTK_TYPE_ARRAY(state, wntkTypesArray) {
+    state.wntkTypesArray = wntkTypesArray
   },
   ERROR_WNTK_TYPE(state) {
     state.status = "error"
@@ -39,6 +43,17 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.get(`https://api.toucanimpact.com/api/whoneedstoknow/${id}`).then(resp => {
         commit("ADD_WNTK_TYPE_ID", resp.data)
+        resolve(resp)
+      }).catch(err => {
+        commit("ERROR_WNTK_TYPE", err)
+        reject(err)
+      })
+    })
+  },
+  getwntkTypesArray({ commit }) {
+    return new Promise((resolve, reject) => {
+      axios.get("https://api.toucanimpact.com/api/whoneedstoknow-to-array").then(resp => {
+        commit("SET_WNTK_TYPE_ARRAY", resp.data)
         resolve(resp)
       }).catch(err => {
         commit("ERROR_WNTK_TYPE", err)

@@ -64,7 +64,7 @@ const actions = {
   addrecipient({ commit }, recipient) {
     return new Promise((resolve, reject) => {
       axios({
-        url: "https://api.toucanimpact.com/api/recipient/",
+        url: "https://api.toucanimpact.com/api/recipient",
         data: recipient,
         method: "POST"
       })

@@ -206,6 +206,9 @@ export default {
                 .then(() => {
                     this.$bvModal.hide("modal-block-normal")
                     this.$store.dispatch("getCompanies")
+                    this.form.name = "";
+                    this.form.email = ""
+                    this.form.website = ""
                 })
                 .catch(err => console.log(err))
         },
