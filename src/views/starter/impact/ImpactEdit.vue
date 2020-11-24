@@ -311,19 +311,6 @@ export default {
                 console.log(1)
             }
 
-            // const formData = new FormData()
-            // formData.append('impact_date', this.form.impact_date)
-            // formData.append('action_by', this.form.action_by)
-            // formData.append('action_taken', this.form.action_taken)
-            // formData.append('action_type_id', this.form.action_type_id)
-            // formData.append('country', this.form.country)
-            // formData.append('categories_id', this.form.categories_id)
-            // formData.append('recipienttypes_id', this.form.recipienttypes_id)
-            // formData.append('recipient_total', this.form.recipient_total)
-            // formData.append('impacttype_id', this.form.impacttype_id)
-            // formData.append('globalgoal_id', this.form.globalgoal_id)
-            // formData.append('made_public', this.form.made_public)
-
             let data = {
                 impact_date: this.form.impact_date,
                 action_by: this.form.action_by,
@@ -335,12 +322,12 @@ export default {
                 recipient_total: this.form.recipient_total,
                 impacttype_id: this.form.impacttype_id,
                 globalgoal_id: this.form.globalgoal_id,
-                made_public: this.form.made_public,
+                made_public: "Yes",
                 id: this.$route.params.id
             }
 
             this.$store
-                .dispatch("updateImapct", data)
+                .dispatch("updateImpact", data)
                 .then(() => {
                     this.$router.push('/impact')
                 })

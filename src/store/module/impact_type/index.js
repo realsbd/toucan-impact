@@ -86,7 +86,7 @@ const actions = {
         method: "PUT"
       })
         .then(resp => {
-          commit("REMOVE_IMPACT_TYPE", resp.data)
+          commit("ADD_IMPACT_TYPE", resp.data)
           resolve(resp)
         })
         .catch(err => {
