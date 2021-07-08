@@ -3,7 +3,7 @@ import axios from "axios"
 const state = {
   tags: [],
   tagsArray: [],
-  recipient: {},
+  tag: {},
   status: ""
 }
 

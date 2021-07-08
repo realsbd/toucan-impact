@@ -89,7 +89,11 @@
                             {{ company.website }}
                         </b-td>
                         <b-td>
-                            {{ company.user_company }}
+                            <ul id="example-1">
+                                <li v-for="(item, index) in company.user_company" :key="index">
+                                    {{ item.user.first_name }} {{ item.user.last_name }} 
+                                </li>
+                            </ul>
 
                             <!-- <b-badge :variant="company.labelVariant">{{ company.labelText }}</b-badge> -->
                         </b-td>

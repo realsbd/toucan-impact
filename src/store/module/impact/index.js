@@ -63,7 +63,7 @@ const actions = {
         })
     })
   },
-  updateImapct({ commit }, impact) {
+  updateImpact({ commit }, impact) {
     return new Promise((resolve, reject) => {
       axios({
         url: `https://api.toucanimpact.com/api/impact/${impact.id}`,
@@ -76,7 +76,7 @@ const actions = {
         })
         .catch(err => {
           commit("ERROR_IMPACT", err)
-          reject(err)
+          reject(impact)
         })
     })
   },
